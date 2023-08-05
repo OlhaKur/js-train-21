@@ -28,10 +28,17 @@
  */
 
 class Musician {
+  static count = 0;
+  #name = this.#name.toString();
+  #instrument = this.#instrument.toString();
   // статичне поле count, яке відслідковує кількість музикантів, початкове значення 0
   // Об'являємо приватні поля #name; #instrument;
 
   constructor(name, instrument) {
+    super(name);
+    super(instrument);
+    this.name = name;
+    this.instrument = instrument;
     // Конструктор приймає два параметри: name та instrument
     // присвоєння вхідного значення name до приватного поля #name
     // присвоєння вхідного значення instrument до приватного поля #instrument
@@ -39,30 +46,35 @@ class Musician {
   }
 
   get name() {
+    return this.#name;
     // гетер для приватного поля #name
     // повертає значення приватного поля #name
   }
 
   get instrument() {
+    return this.#instrument;
     // гетер для приватного поля #instrument
     // повертає значення приватного поля #instrument
   }
 
   set name(newName) {
+    this.#name = newName;
     // сетер для приватного поля #name
     // присвоює нове значення приватному полю #name
   }
 
   set instrument(newInstrument) {
+    this.#instrument = newInstrument;
     // сетер для приватного поля #instrument
     // присвоює нове значення приватному полю #instrument
   }
 
   play() {
+    console.log(`${newName}  грає на ${instrument} `);
     // метод, що виводить рядок в консоль <#name> грає на <#instrument>
   }
 }
-
+let musician = new Musician();
 /*
  * Клас: Guitarist
  * Наслідується від: Musician
@@ -98,6 +110,31 @@ class Musician {
  */
 
 class Guitarist extends Musician {
+  #band = null;
+  constructor(name, instrument, band) {
+    super(name, instrument);
+    this.name = name;
+    this.instrument = instrument;
+    this.band = band;
+  }
+
+  get(band) {
+    return this.#band;
+  }
+
+  set band(value) {
+    this.band = "newBand";
+  }
+
+  joinBand = () => {
+    this.#band = band;
+  };
+
+  play = () => {
+    console.log(
+      ` ${super.name} грає на ${super.instrument} в групі ${this.#band}`
+    );
+  };
   // Об'являємо приватні поля #band;
   // Конструктор приймає три параметри: name, instrument та band
   // виклик конструктора батьківського класу super з двома параметрами name, instrument
@@ -369,7 +406,7 @@ class LeadSinger extends Vocalist {
  */
 
 // Методи для тестування розкоментувати після виконня всіх завдань
-// musician.play();
+musician.play();
 // guitarist.play();
 // bassist.play();
 // band.playMusic();
